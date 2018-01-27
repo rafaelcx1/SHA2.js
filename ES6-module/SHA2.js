@@ -1551,28 +1551,28 @@ export default class SHA2
 	}
 	static SHA224(source /*: Uint8Array or String */) // => ArrayBuffer
 	{ // SHA-224
-		return SHA2Core.SHA224(SHA2Wrapper.into_buffer_view(source));
+		return SHA2Core.SHA224(SHA2.into_buffer_view(source));
 	}
 	static SHA256(source /*: Uint8Array or String */) // => ArrayBuffer
 	{ // SHA-256
-		return SHA2Core.SHA256(SHA2Wrapper.into_buffer_view(source));
+		return SHA2Core.SHA256(SHA2.into_buffer_view(source));
 	}
 	static SHA384(source /*: Uint8Array or String */) // => ArrayBuffer
 	{ // SHA-384
-		return SHA2Core.SHA384(SHA2Wrapper.into_buffer_view(source));
+		return SHA2Core.SHA384(SHA2.into_buffer_view(source));
 	}
 	static SHA512(source /*: Uint8Array or String */) // => ArrayBuffer
 	{ // SHA-512
-		return SHA2Core.SHA512(SHA2Wrapper.into_buffer_view(source));
+		return SHA2Core.SHA512(SHA2.into_buffer_view(source));
 	}
 	static SHA512_224(source /*: Uint8Array or String */) // => ArrayBuffer
 	{ // SHA-512/224
-		const source_buffer_view = SHA2Wrapper.into_buffer_view(source);
+		const source_buffer_view = SHA2.into_buffer_view(source);
 		return SHA2Core.SHA512_224(source_buffer_view);
 	}
 	static SHA512_256(source /*: Uint8Array or String */) // => ArrayBuffer
 	{ // SHA-512/256
-		const source_buffer_view = SHA2Wrapper.into_buffer_view(source);
+		const source_buffer_view = SHA2.into_buffer_view(source);
 		return SHA2Core.SHA512_256(source_buffer_view);
 	}
 	static SHA512_t(
@@ -1580,7 +1580,7 @@ export default class SHA2
 		source /*: Uint8Array or String */
 	) // => ArrayBuffer
 	{ // SHA-512/t
-		const source_buffer_view = SHA2Wrapper.into_buffer_view(source);
+		const source_buffer_view = SHA2.into_buffer_view(source);
 		return SHA2Core.SHA512_t(t, source_buffer_view);
 	}
 }

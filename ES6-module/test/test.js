@@ -3,7 +3,7 @@
 
 /*
 	test.js
-	(Javascript code for testing SHA2.js for web browsers)
+	(Javascript code for testing SHA2.js (ES6 module) for web browsers)
 
 		developed
 			by K. (https://github.com/wlzla000)
