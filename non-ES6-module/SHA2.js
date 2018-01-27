@@ -614,24 +614,26 @@ class SHA2Core
 	static BSIG0_32(x /*: Number */) // => Number
 	{
 		// BSIG0(x) = ROTR^2(x) XOR ROTR^13(x) XOR ROTR^22(x)
-		return SHA2.rotr_32(x, 2) ^ SHA2.rotr_32(x, 13)
-			^ SHA2.rotr_32(x, 22);
+		return SHA2Core.rotr_32(x, 2) ^ SHA2Core.rotr_32(x, 13)
+			^ SHA2Core.rotr_32(x, 22);
 	}
 	static BSIG1_32(x /*: Number */) // => Number
 	{
 		// BSIG1(x) = ROTR^6(x) XOR ROTR^11(x) XOR ROTR^25(x)
-		return SHA2.rotr_32(x, 6) ^ SHA2.rotr_32(x, 11)
-			^ SHA2.rotr_32(x, 25);
+		return SHA2Core.rotr_32(x, 6) ^ SHA2Core.rotr_32(x, 11)
+			^ SHA2Core.rotr_32(x, 25);
 	}
 	static SSIG0_32(x /*: Number */) // => Number
 	{
 		// SSIG0(x) = ROTR^7(x) XOR ROTR^18(x) XOR SHR^3(x)
-		return SHA2.rotr_32(x, 7) ^ SHA2.rotr_32(x, 18) ^ (x >>> 3);
+		return SHA2Core.rotr_32(x, 7) ^ SHA2Core.rotr_32(x, 18)
+			^ (x >>> 3);
 	}
 	static SSIG1_32(x /*: Number */) // => Number
 	{
 		// SSIG1(x) = ROTR^17(x) XOR ROTR^19(x) XOR SHR^10(x)
-		return SHA2.rotr_32(x, 17) ^ SHA2.rotr_32(x, 19) ^ (x >>> 10);
+		return SHA2Core.rotr_32(x, 17) ^ SHA2Core.rotr_32(x, 19)
+			^ (x >>> 10);
 	}
 	//
 	// 	 SHA-224 and SHA-256 use the same sequence of sixty-four
@@ -640,7 +642,7 @@ class SHA2Core
 	// 	the first sixty-four prime numbers. In hex, these contant words
 	// 	are as follows (from left to right):
 	//
-	/// ==> SHA2.K_32
+	/// ==> SHA2Core.K_32
 
 	// 5.2.  SHA-384 and SHA-512
 	//
@@ -693,9 +695,9 @@ class SHA2Core
 	static BSIG0_64(x /*: Uint32Array(2) */) // => Uint32Array(2)
 	{
 		// BSIG0(x) = ROTR^28(x) XOR ROTR^34(x) XOR ROTR^39(x)
-		const [ah, al] = SHA2.rotr_64(x, 28);
-		const [bh, bl] = SHA2.rotr_64(x, 34);
-		const [ch, cl] = SHA2.rotr_64(x, 39);
+		const [ah, al] = SHA2Core.rotr_64(x, 28);
+		const [bh, bl] = SHA2Core.rotr_64(x, 34);
+		const [ch, cl] = SHA2Core.rotr_64(x, 39);
 		const result = new Uint32Array(2);
 		result[0] = ah ^ bh ^ ch;
 		result[1] = al ^ bl ^ cl;
@@ -704,9 +706,9 @@ class SHA2Core
 	static BSIG1_64(x /*: Uint32Array(2) */) // => Uint32Array(2)
 	{
 		// BSIG1(x) = ROTR^14(x) XOR ROTR^18(x) XOR ROTR^41(x)
-		const [ah, al] = SHA2.rotr_64(x, 14);
-		const [bh, bl] = SHA2.rotr_64(x, 18);
-		const [ch, cl] = SHA2.rotr_64(x, 41);
+		const [ah, al] = SHA2Core.rotr_64(x, 14);
+		const [bh, bl] = SHA2Core.rotr_64(x, 18);
+		const [ch, cl] = SHA2Core.rotr_64(x, 41);
 		const result = new Uint32Array(2);
 		result[0] = ah ^ bh ^ ch;
 		result[1] = al ^ bl ^ cl;
@@ -715,9 +717,9 @@ class SHA2Core
 	static SSIG0_64(x /*: Uint32Array(2) */) // => Uint32Array(2)
 	{
 		// SSIG0(x) = ROTR^1(x) XOR ROTR^8(x) XOR SHR^7(x)
-		const [ah, al] = SHA2.rotr_64(x, 1);
-		const [bh, bl] = SHA2.rotr_64(x, 8);
-		const [ch, cl] = SHA2.shr_64(x, 7);
+		const [ah, al] = SHA2Core.rotr_64(x, 1);
+		const [bh, bl] = SHA2Core.rotr_64(x, 8);
+		const [ch, cl] = SHA2Core.shr_64(x, 7);
 		const result = new Uint32Array(2);
 		result[0] = ah ^ bh ^ ch;
 		result[1] = al ^ bl ^ cl;
@@ -726,9 +728,9 @@ class SHA2Core
 	static SSIG1_64(x /*: Uint32Array(2) */) // => Uint32Array(2)
 	{
 		// SSIG1(x) = ROTR^19(x) XOR ROTR^61(x) XOR SHR^6(x)
-		const [ah, al] = SHA2.rotr_64(x, 19);
-		const [bh, bl] = SHA2.rotr_64(x, 61);
-		const [ch, cl] = SHA2.shr_64(x, 6);
+		const [ah, al] = SHA2Core.rotr_64(x, 19);
+		const [bh, bl] = SHA2Core.rotr_64(x, 61);
+		const [ch, cl] = SHA2Core.shr_64(x, 6);
 		const result = new Uint32Array(2);
 		result[0] = ah ^ bh ^ ch;
 		result[1] = al ^ bl ^ cl;
@@ -741,7 +743,7 @@ class SHA2Core
 	// 	eighty prime numbers. In hex, these contant words are as follows
 	// 	(from left to right):
 	//
-	/// ==> SHA2.K_64
+	/// ==> SHA2Core.K_64
 
 	////////////////////////////////////////////////////////////////////////
 	// 6.  Computing the Message Digest
@@ -826,7 +828,7 @@ class SHA2Core
 		// 	then performed for each of the N message blocks. All
 		// 	addition is performed modulo 2^32.
 		//
-		const padded = SHA2.pad_512(view_message);
+		const padded = SHA2Core.pad_512(view_message);
 		const n_blocks = padded.byteLength >>> 6; // (... / 64)
 		const M = (new Array(n_blocks))
 			.fill(undefined)
@@ -865,10 +867,10 @@ class SHA2Core
 			{
 				// 		Wt = SSIG1(W(t-2)) + W(t-7)
 				// 		+ SSIG0(W(t-15)) + W(t-16)
-				W[t] = SHA2.add_modulo_32(
-					SHA2.SSIG1_32(W[t - 2]),
+				W[t] = SHA2Core.add_modulo_32(
+					SHA2Core.SSIG1_32(W[t - 2]),
 					W[t - 7],
-					SHA2.SSIG0_32(W[t - 15]),
+					SHA2Core.SSIG0_32(W[t - 15]),
 					W[t - 16]
 				);
 			}
@@ -906,25 +908,25 @@ class SHA2Core
 				// 		c = b
 				// 		b = a
 				// 		a = T1 + T2
-				const T1 = SHA2.add_modulo_32(
+				const T1 = SHA2Core.add_modulo_32(
 					h,
-					SHA2.BSIG1_32(e),
-					SHA2.CH_32(e, f, g),
-					SHA2.K_32[t],
+					SHA2Core.BSIG1_32(e),
+					SHA2Core.CH_32(e, f, g),
+					SHA2Core.K_32[t],
 					W[t]
 				);
-				const T2 = SHA2.add_modulo_32(
-					SHA2.BSIG0_32(a),
-					SHA2.MAJ_32(a, b, c)
+				const T2 = SHA2Core.add_modulo_32(
+					SHA2Core.BSIG0_32(a),
+					SHA2Core.MAJ_32(a, b, c)
 				);
 				h = g;
 				g = f;
 				f = e;
-				e = SHA2.add_modulo_32(d, T1);
+				e = SHA2Core.add_modulo_32(d, T1);
 				d = c;
 				c = b;
 				b = a;
-				a = SHA2.add_modulo_32(T1, T2);
+				a = SHA2Core.add_modulo_32(T1, T2);
 			}
 
 			// 	4. Compute the intermediate hash value H(i)
@@ -936,14 +938,14 @@ class SHA2Core
 			// 		H(i)5 = f + H(i-1)5
 			// 		H(i)6 = g + H(i-1)6
 			// 		H(i)7 = h + H(i-1)7
-			H[0] = SHA2.add_modulo_32(a, H[0]);
-			H[1] = SHA2.add_modulo_32(b, H[1]);
-			H[2] = SHA2.add_modulo_32(c, H[2]);
-			H[3] = SHA2.add_modulo_32(d, H[3]);
-			H[4] = SHA2.add_modulo_32(e, H[4]);
-			H[5] = SHA2.add_modulo_32(f, H[5]);
-			H[6] = SHA2.add_modulo_32(g, H[6]);
-			H[7] = SHA2.add_modulo_32(h, H[7]);
+			H[0] = SHA2Core.add_modulo_32(a, H[0]);
+			H[1] = SHA2Core.add_modulo_32(b, H[1]);
+			H[2] = SHA2Core.add_modulo_32(c, H[2]);
+			H[3] = SHA2Core.add_modulo_32(d, H[3]);
+			H[4] = SHA2Core.add_modulo_32(e, H[4]);
+			H[5] = SHA2Core.add_modulo_32(f, H[5]);
+			H[6] = SHA2Core.add_modulo_32(g, H[6]);
+			H[7] = SHA2Core.add_modulo_32(h, H[7]);
 		}
 
 		// 	 After the above computations have been sequentially
@@ -1032,7 +1034,7 @@ class SHA2Core
 		// 	then performed for each of the N message blocks. All
 		// 	addition is performed modulo 2^64.
 		//
-		const padded = SHA2.pad_1024(view_message);
+		const padded = SHA2Core.pad_1024(view_message);
 		const n_blocks = padded.byteLength >>> 7; // (... / 128)
 		const M = (new Array(n_blocks))
 			.fill(undefined)
@@ -1077,10 +1079,10 @@ class SHA2Core
 			{
 				// 		Wt = SSIG1(W(t-2)) + W(t-7)
 				// 		+ SSIG0(W(t-15)) + W(t-16)
-				W[t] = SHA2.add_modulo_64(
-					SHA2.SSIG1_64(W[t - 2]),
+				W[t] = SHA2Core.add_modulo_64(
+					SHA2Core.SSIG1_64(W[t - 2]),
 					W[t - 7],
-					SHA2.SSIG0_64(W[t - 15]),
+					SHA2Core.SSIG0_64(W[t - 15]),
 					W[t - 16]
 				);
 			}
@@ -1118,25 +1120,25 @@ class SHA2Core
 				// 		c = b
 				// 		b = a
 				// 		a = T1 + T2
-				const T1 = SHA2.add_modulo_64(
+				const T1 = SHA2Core.add_modulo_64(
 					h,
-					SHA2.BSIG1_64(e),
-					SHA2.CH_64(e, f, g),
-					SHA2.K_64[t],
+					SHA2Core.BSIG1_64(e),
+					SHA2Core.CH_64(e, f, g),
+					SHA2Core.K_64[t],
 					W[t]
 				);
-				const T2 = SHA2.add_modulo_64(
-					SHA2.BSIG0_64(a),
-					SHA2.MAJ_64(a, b, c)
+				const T2 = SHA2Core.add_modulo_64(
+					SHA2Core.BSIG0_64(a),
+					SHA2Core.MAJ_64(a, b, c)
 				);
 				h = g;
 				g = f;
 				f = e;
-				e = SHA2.add_modulo_64(d, T1);
+				e = SHA2Core.add_modulo_64(d, T1);
 				d = c;
 				c = b;
 				b = a;
-				a = SHA2.add_modulo_64(T1, T2);
+				a = SHA2Core.add_modulo_64(T1, T2);
 			}
 
 			// 	4. Compute the intermediate hash value H(i)
@@ -1148,14 +1150,14 @@ class SHA2Core
 			// 		H(i)5 = f + H(i-1)5
 			// 		H(i)6 = g + H(i-1)6
 			// 		H(i)7 = h + H(i-1)7
-			H[0] = SHA2.add_modulo_64(a, H[0]);
-			H[1] = SHA2.add_modulo_64(b, H[1]);
-			H[2] = SHA2.add_modulo_64(c, H[2]);
-			H[3] = SHA2.add_modulo_64(d, H[3]);
-			H[4] = SHA2.add_modulo_64(e, H[4]);
-			H[5] = SHA2.add_modulo_64(f, H[5]);
-			H[6] = SHA2.add_modulo_64(g, H[6]);
-			H[7] = SHA2.add_modulo_64(h, H[7]);
+			H[0] = SHA2Core.add_modulo_64(a, H[0]);
+			H[1] = SHA2Core.add_modulo_64(b, H[1]);
+			H[2] = SHA2Core.add_modulo_64(c, H[2]);
+			H[3] = SHA2Core.add_modulo_64(d, H[3]);
+			H[4] = SHA2Core.add_modulo_64(e, H[4]);
+			H[5] = SHA2Core.add_modulo_64(f, H[5]);
+			H[6] = SHA2Core.add_modulo_64(g, H[6]);
+			H[7] = SHA2Core.add_modulo_64(h, H[7]);
 		}
 
 		// 	 After the above computations have been sequentially
@@ -1183,19 +1185,19 @@ class SHA2Core
 	}
 	static SHA224(view_message /*: Uint8Array */) // => ArrayBuffer
 	{
-		return SHA2.process_512(view_message, false);
+		return SHA2Core.process_512(view_message, false);
 	}
 	static SHA256(view_message /*: Uint8Array */) // => ArrayBuffer
 	{
-		return SHA2.process_512(view_message, true);
+		return SHA2Core.process_512(view_message, true);
 	}
 	static SHA384(view_message /*: Uint8Array */) // => ArrayBuffer
 	{
-		return SHA2.process_1024(view_message, false);
+		return SHA2Core.process_1024(view_message, false);
 	}
 	static SHA512(view_message /*: Uint8Array */) // => ArrayBuffer
 	{
-		return SHA2.process_1024(view_message, true);
+		return SHA2Core.process_1024(view_message, true);
 	}
 	static generate_SHA512_t_IV(
 		t /*: Number */ // The truncation value. An integer within
@@ -1279,7 +1281,7 @@ class SHA2Core
 				.from(string)
 				.map(ch => ch.charCodeAt())
 		);
-		const generated_iv = SHA2.process_1024(
+		const generated_iv = SHA2Core.process_1024(
 			string_to_buffer_view("SHA-512/" + t),
 			true,
 			initial_vector
@@ -1329,18 +1331,18 @@ class SHA2Core
 			);
 		}
 		const n_hash_octets = t >> 3; /// t / 8
-		const iv = SHA2.generate_SHA512_t_IV(t);
-		const hash = SHA2.process_1024(view_message, true, iv);
+		const iv = SHA2Core.generate_SHA512_t_IV(t);
+		const hash = SHA2Core.process_1024(view_message, true, iv);
 		const truncated = hash.slice(0, n_hash_octets);
 		return truncated;
 	}
 	static SHA512_224(view_message /*: Uint8Array */) // => ArrayBuffer
 	{
-		return SHA2.SHA512_t(224, view_message);
+		return SHA2Core.SHA512_t(224, view_message);
 	}
 	static SHA512_256(view_message /*: Uint8Array */) // => ArrayBuffer
 	{
-		return SHA2.SHA512_t(256, view_message);
+		return SHA2Core.SHA512_t(256, view_message);
 	}
 }
 SHA2Core.K_32 = Object.freeze([
