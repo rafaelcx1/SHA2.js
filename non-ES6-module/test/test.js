@@ -220,4 +220,4 @@ console.assert(every_arraybuffers_equal([
 	SHA512_t(8, input2)
 ]));
 
-console.info("No assertion failure? Yay, I did it! XD");
+console.info("No assertion failure means it is working properly.");
