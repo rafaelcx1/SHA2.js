@@ -830,7 +830,7 @@ class SHA2Core
 		//
 		const padded = SHA2Core.pad_512(view_message);
 		const n_blocks = padded.byteLength >>> 6; // (... / 64)
-		const M = (new Array(n_blocks))
+		const M = Array(n_blocks)
 			.fill(undefined)
 			.map((_, i) => new Proxy(
 				new DataView(
@@ -1036,7 +1036,7 @@ class SHA2Core
 		//
 		const padded = SHA2Core.pad_1024(view_message);
 		const n_blocks = padded.byteLength >>> 7; // (... / 128)
-		const M = (new Array(n_blocks))
+		const M = Array(n_blocks)
 			.fill(undefined)
 			.map((_, i) => new Proxy(
 				new DataView(
